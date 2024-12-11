@@ -1,33 +1,21 @@
-package com.imrochamatheus.clients_crud.models;
+package com.imrochamatheus.clients_crud.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
-@Table(name = "tb_client")
+@Table(name = "tb_clients")
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "Name is required")
+    
     private String name;
-
-    @NotBlank(message = "CPF is required")
-    @Range(min = 11L, max = 11L, message = "The CPF must have 11 characters")
     private String cpf;
-
-    @PositiveOrZero(message = "Income must be positive or zero")
     private Double income;
-
-    @PastOrPresent(message = "The date of birth must be past or present")
     private LocalDate birthDate;
-
     private Integer child;
 
     public Client () {}
@@ -42,7 +30,7 @@ public class Client {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -87,18 +75,5 @@ public class Client {
 
     public void setChild(Integer child) {
         this.child = child;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-
-        return Objects.equals(this.id, client.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.id);
     }
 }
